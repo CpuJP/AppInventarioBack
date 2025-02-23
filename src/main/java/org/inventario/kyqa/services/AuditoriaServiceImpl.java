@@ -3,8 +3,8 @@ package org.inventario.kyqa.services;
 import lombok.extern.slf4j.Slf4j;
 import org.inventario.kyqa.dtos.AuditoriaDto;
 import org.inventario.kyqa.entities.Auditoria;
-import org.inventario.kyqa.exception.MessageBadRequestException;
-import org.inventario.kyqa.exception.MessageNotFoundException;
+import org.inventario.kyqa.exception.ResourceBadRequestException;
+import org.inventario.kyqa.exception.ResourceNotFoundException;
 import org.inventario.kyqa.repository.AuditoriaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 @Service(value = "auditoriaService")
@@ -37,52 +36,47 @@ public class AuditoriaServiceImpl implements AuditoriaService {
     }
 
     @Override
-    public ResponseEntity<List<AuditoriaDto>> findAll() {
+    public List<AuditoriaDto> findAll() {
         List<Auditoria> auditorias = auditoriaRepository.findAll();
-        if (!auditorias.isEmpty()) {
-            return new ResponseEntity<>(toDto(auditorias), HttpStatus.OK);
-        } else {
+        if (auditorias.isEmpty()) {
             log.warn("No Auditoria found");
-            throw new MessageNotFoundException("No Auditoria found");
+            throw new ResourceNotFoundException("No Auditoria found");
         }
+        return toDto(auditorias);
     }
 
     @Override
-    public ResponseEntity<List<AuditoriaDto>> findByTipoOperacion(String tipoOperacion) {
+    public List<AuditoriaDto> findByTipoOperacion(String tipoOperacion) {
         List<Auditoria> auditorias = auditoriaRepository.findByTipoOperacionLike(tipoOperacion);
-        if (!auditorias.isEmpty()) {
-            return new ResponseEntity<>(toDto(auditorias), HttpStatus.OK);
-        } else {
-            log.warn(String.format("No Auditoria found by type of operation %s", tipoOperacion));
-            throw new MessageBadRequestException(String.format("No Auditoria found by type of operation %s", tipoOperacion));
+        if (auditorias.isEmpty()) {
+            throw new ResourceBadRequestException(String.format("No Auditoria found by type of operation %s", tipoOperacion));
         }
+        return toDto(auditorias);
     }
 
     @Override
-    public ResponseEntity<List<AuditoriaDto>> findByFechaBetween(Instant fechaInicial, Instant fechaFinal) {
+    public List<AuditoriaDto> findByFechaBetween(Instant fechaInicial, Instant fechaFinal) {
         List<Auditoria> auditorias = auditoriaRepository.findAuditoriasByFechaBetween(fechaInicial, fechaFinal);
-        if (!auditorias.isEmpty()) {
-            return new ResponseEntity<>(toDto(auditorias), HttpStatus.OK);
-        } else {
+        if (auditorias.isEmpty()) {
             // Formatea las fechas para el mensaje
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
                     .withZone(ZoneId.systemDefault());
             String fechaInicialStr = dateFormatter.format(fechaInicial);
             String fechaFinalStr = dateFormatter.format(fechaFinal);
-
             log.warn(String.format("no audit found between date range %s and %s", fechaInicialStr, fechaFinalStr));
-            throw new MessageNotFoundException(String.format("no audit found between date range %s and %s", fechaInicialStr, fechaFinalStr));
+            throw new ResourceNotFoundException(String.format("no audit found between date range %s and %s", fechaInicialStr, fechaFinalStr));
         }
+        return toDto(auditorias);
     }
 
     @Override
-    public ResponseEntity<List<AuditoriaDto>> findByTabla(String tabla) {
+    public List<AuditoriaDto> findByTabla(String tabla) {
         List<Auditoria> auditorias = auditoriaRepository.findAuditoriasByTablaLike(tabla);
-        if (!auditorias.isEmpty()) {
-            return new ResponseEntity<>(toDto(auditorias), HttpStatus.OK);
-        } else {
+        if (auditorias.isEmpty()) {
             log.warn(String.format("No Auditoria found by table %s", tabla));
-            throw new MessageBadRequestException(String.format("No Auditoria found by table %s", tabla));
+            throw new ResourceBadRequestException(String.format("No Auditoria found by table %s", tabla));
+
         }
+        return toDto(auditorias);
     }
 }

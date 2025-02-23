@@ -1,0 +1,19 @@
+scalar DateTime
+
+type Query {
+    findAllAuditorias : [Auditoria],
+    findAuditoriasByTipoOperacion(tipoOperacion: String) : [Auditoria],
+    findAuditoriasByFechaBetween(fechaInicial: DateTime, fechaFinal: DateTime) : [Auditoria],
+    findAuditoriasByTabla(tabla: String) : [Auditoria]
+}
+
+type Auditoria {
+    id: ID
+    tabla: String
+    tipoOperacion: String
+    datosAnteriores: String
+    datosNuevos: String
+    usuario: String
+    fecha: DateTime
+}
+

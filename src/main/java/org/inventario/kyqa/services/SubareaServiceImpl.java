@@ -3,7 +3,7 @@ package org.inventario.kyqa.services;
 import lombok.extern.slf4j.Slf4j;
 import org.inventario.kyqa.dtos.SubareaDto;
 import org.inventario.kyqa.entities.Subarea;
-import org.inventario.kyqa.exception.MessageNotFoundException;
+import org.inventario.kyqa.exception.ResourceNotFoundException;
 import org.inventario.kyqa.repository.SubareaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -35,7 +35,7 @@ public class SubareaServiceImpl implements SubareaService{
             return new ResponseEntity<>(dtos, HttpStatus.OK);
         } else {
             log.warn("No Subareas found");
-            throw new MessageNotFoundException("No subareas found");
+            throw new ResourceNotFoundException("No subareas found");
         }
     }
 }

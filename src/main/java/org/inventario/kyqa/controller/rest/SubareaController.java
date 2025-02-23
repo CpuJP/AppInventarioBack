@@ -1,4 +1,4 @@
-package org.inventario.kyqa.controller;
+package org.inventario.kyqa.controller.rest;
 
 import org.inventario.kyqa.dtos.SubareaDto;
 import org.inventario.kyqa.services.SubareaService;
