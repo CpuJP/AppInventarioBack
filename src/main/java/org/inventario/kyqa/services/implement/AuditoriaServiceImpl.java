@@ -79,4 +79,14 @@ public class AuditoriaServiceImpl implements AuditoriaService {
         }
         return toDto(auditorias);
     }
+
+    @Override
+    public List<AuditoriaDto> findByUsuario(String usuario) {
+        List<Auditoria> auditorias = auditoriaRepository.findAuditoriasByUsuarioContaining(usuario);
+        if (auditorias.isEmpty()) {
+            log.warn(String.format("No Auditoria found by usuario %s", usuario));
+            throw new ResourceBadRequestException(String.format("No Auditoria found by usuario %s", usuario));
+        }
+        return toDto(auditorias);
+    }
 }
