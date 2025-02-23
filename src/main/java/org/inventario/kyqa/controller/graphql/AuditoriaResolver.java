@@ -11,7 +11,6 @@ import java.time.Instant;
 import java.util.List;
 
 @Controller
-@RequestMapping("/auditoria")
 public class AuditoriaResolver {
 
     private final AuditoriaService auditoriaService;
@@ -38,5 +37,10 @@ public class AuditoriaResolver {
     @QueryMapping(name = "findAuditoriasByTabla")
     public List<AuditoriaDto> findByTabla(@Argument(name = "tabla") String tabla) {
         return auditoriaService.findByTabla(tabla);
+    }
+
+    @QueryMapping(name = "findAuditoriasByUsuario")
+    public List<AuditoriaDto> findByUsuario(@Argument(name = "usuario") String usuario) {
+        return auditoriaService.findByUsuario(usuario);
     }
 }

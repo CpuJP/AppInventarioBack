@@ -1,10 +1,15 @@
 scalar DateTime
 
 type Query {
+    #Auditorias
     findAllAuditorias : [Auditoria],
     findAuditoriasByTipoOperacion(tipoOperacion: String) : [Auditoria],
     findAuditoriasByFechaBetween(fechaInicial: DateTime, fechaFinal: DateTime) : [Auditoria],
-    findAuditoriasByTabla(tabla: String) : [Auditoria]
+    findAuditoriasByTabla(tabla: String) : [Auditoria],
+    findAuditoriasByUsuario(usuario: String) : [Auditoria]
+
+    #VistaInventarioItem
+    findAllVistaInventarioItem : [VistaInventarioItem]
 }
 
 type Auditoria {
@@ -17,3 +22,15 @@ type Auditoria {
     fecha: DateTime
 }
 
+type VistaInventarioItem {
+    numeroItem: ID
+    inventarioNombre: String
+    estadoItem: String
+    itemNombre: String
+    subAreas: String
+    cantidad: Int
+    descripcion: String
+    observaciones: String
+    ultimaActualizacion: DateTime
+    foto: String
+}

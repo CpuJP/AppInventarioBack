@@ -2,6 +2,7 @@ package org.inventario.kyqa.config;
 
 import graphql.scalars.ExtendedScalars;
 import org.inventario.kyqa.dtos.AuditoriaDto;
+import org.inventario.kyqa.dtos.VistaInventarioItemDto;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.graphql.execution.RuntimeWiringConfigurer;
@@ -20,8 +21,13 @@ public class GraphQLConfig {
                         // Usar AuditoriaDto como fuente de datos
                         .dataFetcher("fecha", env -> {
                             AuditoriaDto dto = env.getSource(); // ¡Ahora es el DTO!
-                            Instant instant = dto.getFecha().toInstant();
-                            return instant.atOffset(ZoneOffset.UTC);
+                            return dto.getFecha();
+                        })
+                )
+                .type("VistaInventarioItem", typeWiring -> typeWiring
+                        .dataFetcher("ultimaActualizacion", env -> {
+                            VistaInventarioItemDto dto = env.getSource();
+                            return dto.getUltimaActualizacion();
                         })
                 );
     }

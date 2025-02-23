@@ -1,4 +1,4 @@
-package org.inventario.kyqa.services;
+package org.inventario.kyqa.services.implement;
 
 import lombok.extern.slf4j.Slf4j;
 import org.inventario.kyqa.dtos.AuditoriaDto;
@@ -6,9 +6,8 @@ import org.inventario.kyqa.entities.Auditoria;
 import org.inventario.kyqa.exception.ResourceBadRequestException;
 import org.inventario.kyqa.exception.ResourceNotFoundException;
 import org.inventario.kyqa.repository.AuditoriaRepository;
+import org.inventario.kyqa.services.AuditoriaService;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;

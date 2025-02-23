@@ -1,13 +1,18 @@
 package org.inventario.kyqa.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 import org.hibernate.annotations.Immutable;
 
+import java.time.Instant;
+
 @Entity
-@Immutable // Marca la entidad como inmutable (solo lectura)
 @Table(name = "vista_inventarios_items")
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class VistaInventariosItems {
 
     @Id
@@ -35,6 +40,9 @@ public class VistaInventariosItems {
 
     @Column(name = "observaciones", columnDefinition = "TEXT")
     private String observaciones;
+
+    @Column(name = "ultima_actualizacion")
+    private Instant ultimaActualizacion;
 
     @Column(name = "foto", columnDefinition = "TEXT")
     private String foto;

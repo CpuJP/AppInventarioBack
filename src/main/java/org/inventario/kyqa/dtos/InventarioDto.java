@@ -17,4 +17,6 @@ public class InventarioDto implements Serializable {
     private String descripcion;
 
     private Instant fechaCreacion;
+
+    private Instant fechaActualizacion;
 }

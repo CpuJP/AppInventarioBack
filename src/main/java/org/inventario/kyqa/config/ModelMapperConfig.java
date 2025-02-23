@@ -1,7 +1,9 @@
 package org.inventario.kyqa.config;
 
 import org.inventario.kyqa.dtos.AuditoriaDto;
+import org.inventario.kyqa.dtos.VistaInventarioItemDto;
 import org.inventario.kyqa.entities.Auditoria;
+import org.inventario.kyqa.entities.VistaInventariosItems;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +24,8 @@ public class ModelMapperConfig {
                 .setDeepCopyEnabled(true);
         modelMapper.createTypeMap(Auditoria.class, AuditoriaDto.class)
                 .addMappings(mapper -> mapper.using(ctx -> (Instant) ctx.getSource()).map(Auditoria::getFecha, AuditoriaDto::setFecha));
+        modelMapper.createTypeMap(VistaInventariosItems.class, VistaInventarioItemDto.class)
+                .addMappings(mapper -> mapper.using(ctx -> (Instant) ctx.getSource()).map(VistaInventariosItems::getUltimaActualizacion, VistaInventarioItemDto::setUltimaActualizacion));
         return modelMapper;
     }
 }

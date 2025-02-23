@@ -50,6 +50,10 @@ public class Item {
     @Setter(AccessLevel.NONE)
     private Instant fechaCreacion;
 
+    @CreationTimestamp
+    @Column(name = "fecha_actualizacion")
+    private Instant fechaActualizacion;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estado_id")
     private Estado estado;

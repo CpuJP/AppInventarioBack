@@ -15,4 +15,6 @@ public interface AuditoriaService {
     List<AuditoriaDto> findByFechaBetween(Instant fechaInicial, Instant fechaFinal);
 
     List<AuditoriaDto> findByTabla(String tabla);
+
+    List<AuditoriaDto> findByUsuario(String usuario);
 }

@@ -24,4 +24,7 @@ public interface AuditoriaRepository extends JpaRepository<Auditoria, Integer> {
 
     @Transactional(readOnly = true)
     List<Auditoria> findAuditoriasByTablaLike(@NotBlank @Size(max = 255) String tabla);
+
+    @Transactional(readOnly = true)
+    List<Auditoria> findAuditoriasByUsuarioContaining(@NotBlank @Size(max = 50) String usuario);
 }

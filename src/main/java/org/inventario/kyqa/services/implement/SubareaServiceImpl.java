@@ -1,10 +1,11 @@
-package org.inventario.kyqa.services;
+package org.inventario.kyqa.services.implement;
 
 import lombok.extern.slf4j.Slf4j;
 import org.inventario.kyqa.dtos.SubareaDto;
 import org.inventario.kyqa.entities.Subarea;
 import org.inventario.kyqa.exception.ResourceNotFoundException;
 import org.inventario.kyqa.repository.SubareaRepository;
+import org.inventario.kyqa.services.SubareaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service(value = "subareaService")
 @Slf4j
-public class SubareaServiceImpl implements SubareaService{
+public class SubareaServiceImpl implements SubareaService {
 
     private final SubareaRepository subareaRepository;
     private final ModelMapper modelMapper;
