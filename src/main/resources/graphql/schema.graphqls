@@ -10,6 +10,11 @@ type Query {
 
     #VistaInventarioItem
     findAllVistaInventarioItem : [VistaInventarioItem]
+
+    #Estado
+    findAllEstados : [Estado],
+    findEstadoByNombre(nombre: String) : Estado,
+    findEstadosByNombreContaining(nombre: String) : [Estado]
 }
 
 type Auditoria {
@@ -33,4 +38,9 @@ type VistaInventarioItem {
     observaciones: String
     ultimaActualizacion: DateTime
     foto: String
+}
+
+type Estado {
+    id: ID
+    nombre: String
 }

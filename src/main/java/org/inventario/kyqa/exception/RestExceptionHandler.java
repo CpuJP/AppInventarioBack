@@ -12,8 +12,13 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(ApiException.class)
     public ResponseEntity<ErrorResponse> handleApiException(ApiException ex) {
-        return ResponseEntity.status(mapToHttpStatus(ex.getErrorType()))
-                .body(new ErrorResponse(ex.getErrorCode(), ex.getMessage()));
+        HttpStatus status = mapToHttpStatus(ex.getErrorType());
+        ErrorResponse errorResponse = new ErrorResponse(
+                status.value(),      // Código HTTP (ej: 404)
+                ex.getErrorCode(),   // Tu código personalizado
+                ex.getMessage()      // Mensaje de error
+        );
+        return ResponseEntity.status(status).body(errorResponse);
     }
 
     private HttpStatus mapToHttpStatus(ErrorType errorType) {
@@ -30,6 +35,7 @@ public class RestExceptionHandler {
     @Data
     @AllArgsConstructor
     static class ErrorResponse {
+        private int status;
         private String code;
         private String message;
     }
