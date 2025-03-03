@@ -15,6 +15,11 @@ type Query {
     findAllEstados : [Estado],
     findEstadoByNombre(nombre: String) : Estado,
     findEstadosByNombreContaining(nombre: String) : [Estado]
+
+    #Subarea
+    findAllSubareas : [Subarea],
+    findSubareaByNombre(nombre: String) : Subarea,
+    findSubareasByNombreContaining(nombre: String) : [Subarea]
 }
 
 type Auditoria {
@@ -42,6 +47,11 @@ type VistaInventarioItem {
 }
 
 type Estado {
+    id: ID
+    nombre: String
+}
+
+type Subarea {
     id: ID
     nombre: String
 }

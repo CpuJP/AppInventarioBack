@@ -28,7 +28,7 @@ public class EstadoResolver {
     }
 
     @QueryMapping(name = "findEstadosByNombreContaining")
-    public List<EstadoDto> findByNombreContaining(@Argument String nombre) {
+    public List<EstadoDto> findByNombreContaining(@Argument(name = "nombre") String nombre) {
         return estadoService.findByNombreContaining(nombre);
     }
 }

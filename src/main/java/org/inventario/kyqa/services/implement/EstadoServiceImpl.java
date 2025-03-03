@@ -120,7 +120,9 @@ public class EstadoServiceImpl implements EstadoService {
             Optional<Estado> newEstado = estadoRepository.findById(id);
             newEstado.get().setNombre(nombre);
             estadoRepository.save(newEstado.get());
+            return ResponseEntity.ok(modelMapper.map(estadoRepository.findById(id), EstadoDto.class));
         }
-        return ResponseEntity.ok(modelMapper.map(estadoRepository.findById(id), EstadoDto.class));
+        log.warn("Estado with id {} not found", id);
+        throw new ResourceNotFoundException(String.format("Estado with id %d not found", id));
     }
 }

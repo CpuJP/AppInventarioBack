@@ -3,9 +3,7 @@ package org.inventario.kyqa.controller.rest;
 import org.inventario.kyqa.dtos.SubareaDto;
 import org.inventario.kyqa.services.SubareaService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,8 +17,23 @@ public class SubareaController {
         this.subareaService = subareaService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<SubareaDto>> findAll() {
-        return subareaService.findAll();
+    @PostMapping("{nombre}")
+    public ResponseEntity<SubareaDto> createSubarea(@PathVariable String nombre) {
+       return subareaService.create(nombre);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteSubarea(@PathVariable Integer id) {
+        return subareaService.deleteById(id);
+    }
+
+    @DeleteMapping("/nombre/{nombre}")
+    public ResponseEntity<String> deleteSubareaByNombre(@PathVariable String nombre) {
+        return subareaService.deleteByNombre(nombre);
+    }
+
+    @PatchMapping
+    public ResponseEntity<SubareaDto> updateSubarea(@RequestParam Integer id, @RequestParam String nombre) {
+        return subareaService.update(id, nombre);
     }
 }
