@@ -26,6 +26,8 @@ public class VistaInventarioItemDto implements Serializable {
 
     private String observaciones;
 
+    private Instant fechaCreacion;
+
     private Instant ultimaActualizacion;
 
     private String foto;
@@ -33,6 +35,12 @@ public class VistaInventarioItemDto implements Serializable {
     public OffsetDateTime getUltimaActualizacion() {
         return this.ultimaActualizacion != null
                 ? this.ultimaActualizacion.atOffset(ZoneOffset.UTC)
+                : null; // Retorna null si el Instant es null
+    }
+
+    public OffsetDateTime getFechaCreacion() {
+        return this.fechaCreacion != null
+                ? this.fechaCreacion.atOffset(ZoneOffset.UTC)
                 : null; // Retorna null si el Instant es null
     }
 }

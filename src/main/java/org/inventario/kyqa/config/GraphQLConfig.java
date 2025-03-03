@@ -29,6 +29,10 @@ public class GraphQLConfig {
                             VistaInventarioItemDto dto = env.getSource();
                             return dto.getUltimaActualizacion();
                         })
+                        .dataFetcher("fechaCreacion", env -> {
+                            VistaInventarioItemDto dto = env.getSource();
+                            return dto.getFechaCreacion();
+                        })
                 );
     }
 }

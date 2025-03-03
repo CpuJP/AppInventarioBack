@@ -40,6 +40,9 @@ public class VistaInventariosItems {
     @Column(name = "observaciones", columnDefinition = "TEXT")
     private String observaciones;
 
+    @Column(name = "fecha_creacion")
+    private Instant fechaCreacion;
+
     @Column(name = "ultima_actualizacion")
     private Instant ultimaActualizacion;
 

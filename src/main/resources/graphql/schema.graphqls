@@ -36,6 +36,7 @@ type VistaInventarioItem {
     cantidad: Int
     descripcion: String
     observaciones: String
+    fechaCreacion: DateTime
     ultimaActualizacion: DateTime
     foto: String
 }

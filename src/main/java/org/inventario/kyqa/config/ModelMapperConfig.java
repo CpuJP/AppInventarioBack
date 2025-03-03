@@ -25,7 +25,8 @@ public class ModelMapperConfig {
         modelMapper.createTypeMap(Auditoria.class, AuditoriaDto.class)
                 .addMappings(mapper -> mapper.using(ctx -> (Instant) ctx.getSource()).map(Auditoria::getFecha, AuditoriaDto::setFecha));
         modelMapper.createTypeMap(VistaInventariosItems.class, VistaInventarioItemDto.class)
-                .addMappings(mapper -> mapper.using(ctx -> (Instant) ctx.getSource()).map(VistaInventariosItems::getUltimaActualizacion, VistaInventarioItemDto::setUltimaActualizacion));
+                .addMappings(mapper -> mapper.using(ctx -> (Instant) ctx.getSource()).map(VistaInventariosItems::getUltimaActualizacion, VistaInventarioItemDto::setUltimaActualizacion))
+                .addMappings(mapper -> mapper.using(ctx -> (Instant) ctx.getSource()).map(VistaInventariosItems::getFechaCreacion, VistaInventarioItemDto::setFechaCreacion));
         return modelMapper;
     }
 }
